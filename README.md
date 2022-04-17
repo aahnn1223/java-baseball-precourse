@@ -13,7 +13,7 @@
 ### GameManager
 : 게임 운영하는 매니저
 1. 참가자의 의사에 따라 게임 진행 여부 통제
-* boolean askPlayGameYn()
+* void askPlayGameYn()
 * void checkPlayGameYn(boolean playerSignal) { 1 : 진행, 2 : 중단, 1,2 외에 입력 시 입력값 범위 오류}
 2. 게임 시작, 종료
 * void startGame()
@@ -25,6 +25,8 @@
 : 게임에 참가하는 플레이어
 1. 정답 제출
 * int tryAnswer()
+2. 진행 여부 전달 
+* int expressIntesion
 
 ### Referee
 : GameManager 가 출제 한 문제와 Player가 제출한 정답을 비교하여 결과를 GamaManager에 전달
