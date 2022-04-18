@@ -14,26 +14,14 @@ public class GameManager {
         System.out.print("숫자를 입력해주세요 : ");
     }
 
-    void checkPlayGameYn(int playerSignal){
+    boolean checkPlayGameYn(int playerSignal){
         if(playerSignal == 1){
-            int digit = answerNumber.getDigit();
-            startGame(digit);
+            return true;
         }
         if(playerSignal == 2){
-            endGame();
+            return false;
         }
-
-    }
-
-    int startGame(int digitNumber){
-        int answer = createThreeDigitRandomNumber(digitNumber);
-        return answer;
-    }
-
-    void endGame(){
-        System.out.println("숫자야구 게임이 종료되었습니다.");
-        resetAnswer();
-        return;
+        throw new IllegalArgumentException("잘못 입력 하셨습니다.");
     }
 
     int createThreeDigitRandomNumber(int digitNumber){
@@ -46,9 +34,5 @@ public class GameManager {
         System.out.println(createdThreeDigitRandomNumber);
 
         return createdThreeDigitRandomNumber;
-    }
-
-    void resetAnswer(){
-        this.answerNumber = null;
     }
 }

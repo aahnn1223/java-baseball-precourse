@@ -17,14 +17,13 @@ public class Referee {
     void assignReferee(int answer){
         this.answer = answer;
         this.answerLength = getNumberLength(answer);
-        setanswerIdxAndValue(answer);
+        setAnswerIdxAndValue(answer);
         gameManager = new GameManager();
         player = new Player();
     }
 
-    void setanswerIdxAndValue(int answer){
+    void setAnswerIdxAndValue(int answer){
         int length = answerLength;
-
         ArrayList<Integer> answerArray = new ArrayList<>();
         for(int idx = 0; idx < length; idx++){
             int inputNum = getIdxValueOfNumber(answer, idx);
@@ -53,23 +52,20 @@ public class Referee {
         return answerIdxValue;
     }
 
-    boolean checkSubmittedNumber(int submittedAnswer){
+    boolean checkStikeBallCnt(int submittedAnswer){
         int strike = 0;
         int ball = 0;
         int length = this.answerLength;
-
         setSubittedAsnwerFromPlayer(submittedAnswer);
-
         for(int idx = 0; idx < length; idx++){
             strike += isStrike(answerIdxAndValue.get(idx), submittedAnswerFromPlayer.get(idx));
             ball += isBall(answerIdxAndValue.get(idx), submittedAnswerFromPlayer.get(idx));
         }
-
         announce(strike, ball);
         if(strike == 3){
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
     int isStrike(int answer, int submittedAnswer){
@@ -80,17 +76,14 @@ public class Referee {
     }
 
     int isBall(int answer, int submittedAnswer){
-
         int strike = isStrike(answer, submittedAnswer);
         if(strike != 0){
             return 0;
         }
-
         boolean isContain = answerIdxAndValue.contains(submittedAnswer);
         if(isContain){
             return 1;
         }
-
         return 0;
     }
 
@@ -105,14 +98,12 @@ public class Referee {
             System.out.println(ballCnt + "볼" + strikeCnt + "스트라이크");
         } else if(strikeCnt == 3 && ballCnt == 0){
             System.out.println(strikeCnt + "스트라이크");
-            checkRestartYn();
         }
     }
 
-    void checkRestartYn(){
+    boolean askRestartYn(){
         gameManager.askPlayGameYn();
         int playerIntesion = player.expressIntesion();
-        gameManager.checkPlayGameYn(playerIntesion);
+        return gameManager.checkPlayGameYn(playerIntesion);
     }
-
 }
