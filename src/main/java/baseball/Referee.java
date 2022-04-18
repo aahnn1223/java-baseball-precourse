@@ -32,7 +32,7 @@ public class Referee {
         this.answerIdxAndValue = answerArray;
     }
 
-    void setSubittedAsnwerFromPlayer(int submittedAnswer){
+    void setSubmittedAsnwerFromPlayer(int submittedAnswer){
         int length = getNumberLength(submittedAnswer);
         ArrayList<Integer> submittedAnswerArray = new ArrayList<>();
         for(int idx = 0; idx < length; idx++){
@@ -52,11 +52,11 @@ public class Referee {
         return answerIdxValue;
     }
 
-    boolean checkStikeBallCnt(int submittedAnswer){
+    boolean checkStrikeBallCnt(int submittedAnswer){
         int strike = 0;
         int ball = 0;
         int length = this.answerLength;
-        setSubittedAsnwerFromPlayer(submittedAnswer);
+        setSubmittedAsnwerFromPlayer(submittedAnswer);
         for(int idx = 0; idx < length; idx++){
             strike += isStrike(answerIdxAndValue.get(idx), submittedAnswerFromPlayer.get(idx));
             ball += isBall(answerIdxAndValue.get(idx), submittedAnswerFromPlayer.get(idx));
@@ -95,7 +95,7 @@ public class Referee {
         } else if(strikeCnt == 0 && ballCnt != 0){
             System.out.println(ballCnt + "볼");
         } else if(strikeCnt != 0 && ballCnt != 0){
-            System.out.println(ballCnt + "볼" + strikeCnt + "스트라이크");
+            System.out.println(ballCnt + "볼 " + strikeCnt + "스트라이크");
         } else if(strikeCnt == 3 && ballCnt == 0){
             System.out.println(strikeCnt + "스트라이크");
         }

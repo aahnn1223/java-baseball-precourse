@@ -1,24 +1,39 @@
 package baseball;
 import camp.nextstep.edu.missionutils.Randoms;
 
+import java.util.ArrayList;
+
 public class RandomNumber {
     private int number;
-    private int digit;
+    private ArrayList<Integer> pickNumbers;
 
-    // 전달 받은 자릿수 만큼 난수 생성
     RandomNumber (int digit){
-        this.digit = digit;
-        int startInclusive = (int)(Math.pow(10, digit-1));
-        int endInclusive = (int)(Math.pow(10,digit) -1);
+        pickRandomNumber(digit);
+        makeRandomNumber(digit);
+    }
 
-        this.number = Randoms.pickNumberInRange(startInclusive, endInclusive);
+    void pickRandomNumber(int digit){
+        pickNumbers = new ArrayList<>();
+        while(pickNumbers.size() < digit) {
+            addNumber(Randoms.pickNumberInRange(1, 9));
+        }
+    }
+
+    void addNumber(int pickNumber){
+        if(!pickNumbers.contains(pickNumber)){
+            pickNumbers.add(pickNumber);
+        }
+    }
+
+    void makeRandomNumber(int digit){
+        int tmpNum = 0;
+        for(int idx = 0; idx < digit; idx++){
+            tmpNum += pickNumbers.get(idx) * Math.pow(10, digit-idx-1);
+        }
+        this.number = tmpNum;
     }
 
     public int getNumber(){
         return this.number;
-    }
-
-    public int getDigit(){
-        return this.digit;
     }
 }

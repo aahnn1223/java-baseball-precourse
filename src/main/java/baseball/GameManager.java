@@ -31,7 +31,7 @@ public class GameManager {
         this.answerNumber = new RandomNumber(digit);
         int createdThreeDigitRandomNumber = answerNumber.getNumber();
         // 생성된 숫자 확인
-        System.out.println(createdThreeDigitRandomNumber);
+        //System.out.println(createdThreeDigitRandomNumber);
 
         return createdThreeDigitRandomNumber;
     }

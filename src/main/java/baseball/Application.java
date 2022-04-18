@@ -11,8 +11,6 @@ public class Application {
         // N 자릿수 숫자 야구 게임
         int playRandomNumberDigit = 3;
         GameBoard gameBoard = new GameBoard();
-
         gameBoard.newGame(playRandomNumberDigit);
-
     }
 }

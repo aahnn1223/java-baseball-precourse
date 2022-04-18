@@ -17,7 +17,7 @@ public class GameBoard {
         while(!isAnswer) {
             gameManager.askForAnswer();
             int submittedNumberFromPlayer = player.tryAnswer(digit);
-            isAnswer = referee.checkStikeBallCnt(submittedNumberFromPlayer);
+            isAnswer = referee.checkStrikeBallCnt(submittedNumberFromPlayer);
         };
     }
 
@@ -29,5 +29,6 @@ public class GameBoard {
             play(digit, randomNumber);
             playGameYn = referee.askRestartYn();
         }
+        System.out.println("게임 종료");
     }
 }
