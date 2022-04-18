@@ -20,11 +20,11 @@ public class GameBoard {
         int randomNumber = gameManager.createThreeDigitRandomNumber(digit);
 
         referee.assignReferee(randomNumber);
-
-        do {
+        boolean playAgain = true;
+        while(playAgain) {
             gameManager.askForAnswer();
             int submitAnswerFromPlayer = player.tryAnswer(digit);
-            referee.checkSubmittedNumber(submitAnswerFromPlayer);
-        } while (true);
+            playAgain = referee.checkSubmittedNumber(submitAnswerFromPlayer);
+        };
     }
 }

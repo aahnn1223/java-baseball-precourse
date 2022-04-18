@@ -40,7 +40,7 @@ public class GameManager {
 
         // 생성할 난수의 자릿수
         int digit = digitNumber;
-        answerNumber = new RandomNumber(digit);
+        this.answerNumber = new RandomNumber(digit);
         int createdThreeDigitRandomNumber = answerNumber.getNumber();
         // 생성된 숫자 확인
         System.out.println(createdThreeDigitRandomNumber);

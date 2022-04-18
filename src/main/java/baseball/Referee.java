@@ -53,7 +53,7 @@ public class Referee {
         return answerIdxValue;
     }
 
-    void checkSubmittedNumber(int submittedAnswer){
+    boolean checkSubmittedNumber(int submittedAnswer){
         int strike = 0;
         int ball = 0;
         int length = this.answerLength;
@@ -66,6 +66,10 @@ public class Referee {
         }
 
         announce(strike, ball);
+        if(strike == 3){
+            return false;
+        }
+        return true;
     }
 
     int isStrike(int answer, int submittedAnswer){
@@ -93,22 +97,22 @@ public class Referee {
     void announce(int strikeCnt, int ballCnt){
         if(strikeCnt == 0 && ballCnt == 0){
             System.out.println("낫싱");
-        }
-        if(strikeCnt != 0 && ballCnt == 0 && strikeCnt != 3){
+        } else if(strikeCnt != 0 && ballCnt == 0 && strikeCnt != 3){
             System.out.println(strikeCnt + "스트라이크");
-        }
-        if(strikeCnt == 0 && ballCnt != 0){
+        } else if(strikeCnt == 0 && ballCnt != 0){
             System.out.println(ballCnt + "볼");
-        }
-        if(strikeCnt != 0 && ballCnt != 0){
+        } else if(strikeCnt != 0 && ballCnt != 0){
             System.out.println(ballCnt + "볼" + strikeCnt + "스트라이크");
-        }
-        if(strikeCnt == 3 && ballCnt == 0){
+        } else if(strikeCnt == 3 && ballCnt == 0){
             System.out.println(strikeCnt + "스트라이크");
-            gameManager.askPlayGameYn();
-            int playerIntesion = player.expressIntesion();
-            gameManager.checkPlayGameYn(playerIntesion);
+            checkRestartYn();
         }
+    }
+
+    void checkRestartYn(){
+        gameManager.askPlayGameYn();
+        int playerIntesion = player.expressIntesion();
+        gameManager.checkPlayGameYn(playerIntesion);
     }
 
 }
