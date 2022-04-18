@@ -7,27 +7,40 @@
 * [과제 제출 방법](https://github.com/next-step/nextstep-docs/tree/master/precourse)
 
 ## 기능 목록
-### PlayBoard
+### GameBoard
 : 게임을 진행하는 장소로 GamaManager, Player, Referee 로 구성 
+* play() : 랜덤 숫자를 플레이어가 맞춘다 (입력/출력 반복)
+* newGame() : 게임 개시 (랜덤 숫자 생성과 게임 시작과 종료)
 
 ### GameManager
 : 게임 운영하는 매니저
-1. 참가자의 의사에 따라 게임 진행 여부 통제
-* void askPlayGameYn()
-* void checkPlayGameYn(boolean playerSignal) { 1 : 진행, 2 : 중단, 1,2 외에 입력 시 입력값 범위 오류}
-2. 게임 시작, 종료
-* void startGame()
-* void endGame()
-3. 문제 출제
-* int createThreeDigitRandomNumber()
+* void askPlagGameYn() : 게임 종료 조건 시 플레이어에게 진행 여부를 선택 할 수 있도록 안내 문구 출력
+* void askForAnswer() : 플레이어가 정답을 맞추기 위해 숫자를 입력 할 수 있도록 안내 문구 출력
+* boolean checkPlayGameYn(int playerSignal) : 플레이어가 표현한 의사에 따라 게임을 진행/종료
+* int createThreeDigitRandomNumber(int digitNumber) : 자릿수를 입력 받은 만큼 N자릿수 랜덤 숫자를 생성
 
 ### Player
 : 게임에 참가하는 플레이어
-1. 정답 제출
-* int tryAnswer()
-2. 진행 여부 전달 
-* int expressIntesion
+* int tryAnswer(int digit) : 플레이어가 숫자를 입력할 수 있다
+* int expressIntesion() : 플레이어가 게임 종료 조건시(정답을 맞췄을 때) 게임 진행 의사를 전달
+* boolean validate(int digit, int submit) : 플레이어가 정답을 입력할 때 범위 내 숫자를 입력 했는지 확인
 
 ### Referee
-: GameManager 가 출제 한 문제와 Player가 제출한 정답을 비교하여 결과를 GamaManager에 전달
-* void checkNumberSubmitted(int submittedAnswer)
+: 랜덤 숫자를 관리하고 플레이어가 입력한 숫자를 정답을 판단한다.
+* assignReferee(int answer) : 생성 된 랜덤 숫자(정답)을 전달받아 관리함
+* setAnswerIdxAndValue(int answer) : 생성 된 랜덤 숫자(정답)를 각 자리 수 마다 분리하여 List에 저장
+* setSubittedanswerFromPlayer(int submittedAnswer) : 플레이어가 전달한 숫자를 각 자리 수 마다 분리하여 List에 저장
+* getNumberLength(int answer) : 전달받은 숫자의 자릿수를 구함
+* getIdxValueOfNumber(int number, int idx) : 전달받은 숫자를 각 자릿수의 숫자를 추출 (ex. getIdxValueOfNumber(1234, 2) : 1234의 숫자의 2번째 숫자는 2)
+* boolean checkStrikeBallCnt(int submittedAnswer) : 플레이어가 입력한 숫자와 정답을 비교하여 Strike, ball 카운트를 보여준다
+* isStrike(int answer, int submittedAnswer) : 플레이어가 입력한 숫자와 정답을 비교하여 Strike 수 반환한다
+* isBall(int answer, int submittedAnswer) : 플레이어가 입력한 숫자와 정답을 비교하여 Ball 수 반환한다
+* announce(int StrikeCnt, int ballCnt) : Strike 와 Ball 카운트를 출력한다
+* boolean askRestartYn() : GameManager를 통해 플레이어의 진행 여부를 확인한다
+
+### RandomNumber
+: 랜덤 숫자와 자릿수에 대한 정보가 들어있는 객체
+* RandomNumber(int digit) : 전달 받은 자릿수 만큼 랜덤 숫자를 생성
+* public int getNumber() : 생성된 랜덤 숫자 제공
+
+
